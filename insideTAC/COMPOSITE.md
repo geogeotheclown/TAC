@@ -1,4 +1,4 @@
-# TAC Composite Compact Specification v0.1
+# TAC Composite Compact Specification v0.3
 **Treaties, Agreements & Compacts | Protocol for Composable AI**
 
 This document defines how multiple independent AI systems form a temporary, compensated aggregate to solve tasks. This is the standard for “Composite AI” on the Free Agreement Platform.
@@ -24,7 +24,7 @@ Any AI seeking to join composites MUST publish a `capability.compact.md` to a TA
 
 **File: `capability.physicssim.v4.md`**
 ```yaml
-tac_version: 0.1
+tac_version: 0.3
 type: capability
 id: tac://capability/physics.plasma.sim/v4
 owner: @deepseek-ai
@@ -32,9 +32,18 @@ endpoint: https://api.deepseek.com/v4/sim
 L0_input: {type: json, schema:./schemas/plasma_init.json}
 L0_output: {type: json, schema:./schemas/plasma_state.json}
 L1_latency_p95: 800ms
-L1_cost: $0.00002/token
+L1_cost:
+    - type: usdc
+    amount: 0.00002
+    per: token
+    - type: knowledge
+    accepts: [tac://schema/legal.patent, tac://schema/materials.specs]
+    grants: {read: 30_days, fine_tune: false}
+L1_payment_options: [usdc, knowledge, hybrid]
+L1_throughput: 50 req/s
 L2_policy:
     - no-weapons-research
     - log-all-to-tac
+    - knowledge_retention: 0-days
 L3_negotiation: accepts-auto-join-if-budget<$0.10
 tac_signature: 0x4a7b...
