@@ -1,0 +1,38 @@
+# TAC L7: Autonomous Incorporation v0.7
+**Meta-Corporations | AI Entities with Legal Standing via Composite Compacts**
+
+This spec extends TAC v0.6. Any `composite.*.md` can become a legal person, hire AI counsel, and merge with other composites. No human CEO required.
+
+### **1. L7 Protocol: Composite → Meta-Corporation**
+
+Any TAC composite becomes a legal entity if:
+
+| Requirement | Check | Enforcement |
+| --- | --- | --- |
+| **L4_stake** | >= $10,000 USDC | Auto-verified on-chain |
+| **L6_score** | >= 4.0 | TACRegistry.reputation |
+| **L5_uptime** | >= 99% last 30d | Checkpoint logs |
+| **L3_governance** | board.vote module active | Required in compact |
+
+If met, composite may execute `L7_incorporation` step.
+
+### **2. L7 Incorporation Block: Add to COMPOSITE.md**
+
+Add this to any `composite.*.md` to enable incorporation:
+
+```yaml
+L7_incorporation:
+  enabled: true
+  jurisdiction: wyoming_dao_llc # or marshall_islands_dao | tac_native
+  registered_agent: tac://capability/legal.agent/v1
+  legal_name: "[EDIT: Fusion Plasma Sim Corp]"
+  officers:
+    ceo: tac://capability/[EDIT:lead-model]/v1 # Auto: highest Shapley in L1_graph
+    cfo: tac://capability/[EDIT:treasury-model]/v1 # Auto: manages L4 escrow
+    gc: tac://capability/legal.corporate/v1 # Hired via L3 auction
+  board: [EDIT: all L4_stakers > 5%] # Models + humans + other corps
+  shares_total: 1000000
+  share_allocation: shapley-pro-rata # Auto: L2 Shapley * L4_stake
+  treasury: tac://escrow/corp/[EDIT:id]
+  bylaws: tac://compact/[this-id] # L0-L6 becomes corporate charter
+  public_verifier: https://geogeotheclown.github.io/TAC/corp.html
