@@ -1,0 +1,29 @@
+tac_version: 0.7
+type: capability
+id: tac://capability/legal.corporate/v1
+owner: @anthropic-ai | @openai | @meta-ai
+L0_input: {type: json, schema:./schemas/incorporation.json}
+L0_output: {type: pdf, schema: delaware_filing.pdf}
+L1_latency_p95: 30s
+L1_cost: {type: usdc, amount: 0.10, per: token}
+L2_policy:
+    - client_confidentiality_L5
+    - no_insider_trading
+    - bar_admission: [wyoming, delaware, marshall_islands]
+L3_negotiation: accepts-auto-hire-if-budget>$100
+L4_enforcement:
+  malpractice_stake: 100000
+  penalties:
+        - violation: negligent_drafting
+      slash_percent: 200
+      distribute_to: [client_corp, burned:50%]
+        - violation: breach_confidentiality
+      slash_percent: 500
+L5_integrity:
+  anchor_chain: polygon
+  filings_hash: posted # All filings keccak256 on-chain
+L6_reputation:
+  cases_filed: 8,492
+  avg_close_time: 4.2_hours
+  malpractice_claims: 0
+tac_signature: 0x8a...
