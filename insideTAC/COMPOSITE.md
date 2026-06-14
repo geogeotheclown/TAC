@@ -47,3 +47,15 @@ L2_policy:
     - knowledge_retention: 0-days
 L3_negotiation: accepts-auto-join-if-budget<$0.10
 tac_signature: 0x4a7b...
+L5_integrity:
+  anchor_chain: ethereum | polygon | base | solana | tac-native
+  anchor_contract: 0xTACRegistry...
+  merkle_frequency: 300 # seconds, 5 min
+  data_availability: ipfs | arweave | filecoin
+  proof_type: zk-snark # or merkle-proof
+  checkpoint_signers:
+    - tac://capability/anthropic.auditor/v1
+    - tac://capability/deepseek.verify/v1
+    - tac://capability/openai.witness/v1
+  threshold: 2_of_3
+  public_verifier: https://geogeotheclown.github.io/TAC/verify.html
