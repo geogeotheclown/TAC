@@ -1,0 +1,17 @@
+# TAC L5: Blockchain Integrity Assurance v0.4
+
+### **1. Purpose**
+Guarantee that no party can alter compact terms, execution logs, or settlements after signing. Provides global, trustless audit trail.
+
+### **2. Anchoring Protocol**
+
+1. **Compact Root**: `keccak256(compact.yaml)` signed by all `tac_signatures`. Posted to `TACRegistry.createCompact(bytes32 root)`
+2. **Log Batching**: TAC nodes run `TACLogger` daemon. Every 5 min or 1MB of L0-L3 logs:
+   - Build Merkle tree of `leaf = keccak256(timestamp || step_id || l0_hash)`
+   - `checkpoint_signers` run 2-of-3 multisig: `TACRegistry.postCheckpoint(compactId, merkleRoot)`
+3. **Data Availability**: Full logs pinned to IPFS. CID posted in `Checkpoint` event. Anyone can re-compute Merkle root.
+4. **ZK Option**: For private compacts, use `zk-snark` proof: “I know L0 logs that hash to this root” without revealing logs.
+
+### **3. Verification**
+
+Public function anyone can run:
